@@ -15,14 +15,15 @@ export function ProfileForm({ user }: any){
             
         };
 
-        const res = await fetch('/api/user', {
+        const res = await fetch('/api/users', {
             method: 'PUT',
             body: JSON.stringify(body),
             headers:{
                 'Content-Type' : 'application/json'
             },
         });
-        await res.json();
+        let response = await res.json();
+
     };
 
     return (
