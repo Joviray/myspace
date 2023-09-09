@@ -29,7 +29,7 @@ export default async function UsersProfile({ params}: Props){
                <h3>Bio</h3>
                <p>{bio}</p>  
 
-               {/* @ts-expect-error Server Component */}
+             
 
                <FollowButton targetUserId={params.id} />  
 
