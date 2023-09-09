@@ -24,7 +24,7 @@ export async function generateStaticParams(){
 
 export default async function Post({ params }: Props) {
 
-    const posts: Post[] = await fetch('http://localhost:3000/api/content', { cache: ' '}).then((res) => res.json());
+    const posts: Post[] = await fetch('http://localhost:3000/api/content', {cache:'default'}).then((res) => res.json());
 
     const post = posts.find((post) => post.slug === params.slug)!;
 
