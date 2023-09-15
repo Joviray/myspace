@@ -16,10 +16,11 @@ export default function NavMenu() {
             </Link>
             <ul className={styles.links}>
                 <li>
-                    <Link href={'/about'}>About</Link>
+                    <Link href={'/about'}>About Us</Link>
                 </li>
+               
                 <li>
-                    <Link href={'/blog'}>Blog</Link>
+                    <Link href={'/calendar'}>Calendar</Link>
                 </li>
                 <li>
                     <Link href={'/users'}>Users</Link>
