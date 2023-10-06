@@ -8,9 +8,9 @@ export default function NavMenu() {
         <nav className={styles.nav}>
             <Link href={'/'}>
             <Image
-            src = "/logo.svg"
-            width={216}
-            height = {30}
+            src = "/gator_logo.jpg"
+            width={73}
+            height = {73}
             alt="NextSpace Logo"
             />
             </Link>
