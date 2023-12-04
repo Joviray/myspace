@@ -40,8 +40,6 @@ export function ProfileForm({ user }: any){
                     defaultValue={user?.bio ?? ''}>
                 
                     </textarea>
-                <label htmlFor="age">Age</label>
-                <input type="number" name="age" defaultValue={user?.age ?? 0}/>
                 <label htmlFor="image">Profile Image URL</label>
                 <input type="text" name="image" defaultValue={user?.image ?? ''}/>
 
