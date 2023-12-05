@@ -1,13 +1,12 @@
 'use server';
-import { Prisma } from "@prisma/client";
 import { getServerSession } from 'next-auth';
 import { prisma } from  '@/lib/prisma';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import ResourceDeleteButton from "./resourceDeleteButton";
-import { useRouter } from 'next/router';
+import { ResourceDeleteButton } from './ResourceDeleteButton';
+import Link from 'next/link';
 
 
-export default async ({ resources }: any) => {
+export const ResourceList = async ({ resources }: any) => {
     const session = await getServerSession(authOptions);
     const currentUserEmail = session?.user?.email!;
     const currentUserId = await prisma.user.findUnique({
@@ -35,7 +34,9 @@ export default async ({ resources }: any) => {
                 <tbody>
                     {usersResources.map((resource) => (
                         <tr key={resource.id}>
-                            <td><b>{resource.title}</b></td>
+                            <td>
+                                <Link href={`/resource/${resource.id}`}>{resource.title}</Link>
+                            </td>
                             <td>{resource.name}</td>
                             <td>{resource.description}</td>
                             <td>

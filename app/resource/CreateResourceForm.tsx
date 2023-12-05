@@ -40,8 +40,8 @@ export function CreateResourceForm({ user }: any){
                 <label htmlFor="description">description</label>
                 <textarea
                     name="description"
-                    cols={30}
-                    rows={10}
+                    cols={80}
+                    rows={4}
                     defaultValue="">
                 </textarea>
 

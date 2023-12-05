@@ -4,8 +4,8 @@ import { ProfileForm } from './ProfileForm';
 import { redirect } from 'next/navigation';
 import { SignOutButton } from '@/components/button';
 import { authOptions } from "../api/auth/[...nextauth]/route"
-import { CreateResourceForm } from './ResourceForm';
-import ResourceList from './resource/resourceList';
+import { CreateResourceForm } from '../resource/CreateResourceForm';
+import { ResourceList } from '../resource/ResourceList';
 
 
 export default async function Dashboard() {

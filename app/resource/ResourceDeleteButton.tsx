@@ -1,9 +1,9 @@
 'use client'
-import { r } from '@fullcalendar/resource/internal-common';
+
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify';
 
-export default ({id}:{id:string}) => {
+export const ResourceDeleteButton = async ({id}:{id:string}) => {
     const router = useRouter();
     return (
         <button onClick={async (resource)=>{

@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'react-toastify';
 
 export function ProfileForm({ user }: any){
     const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,7 @@ export function ProfileForm({ user }: any){
             },
         });
         let response = await res.json();
+        toast.success("Profile Updated!");
 
     };
 
