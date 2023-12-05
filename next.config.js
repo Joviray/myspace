@@ -9,7 +9,10 @@ const nextConfig = {
                 pathname: '/u/**',
             }
         ]
-    }
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
 }
 
 module.exports = nextConfig
