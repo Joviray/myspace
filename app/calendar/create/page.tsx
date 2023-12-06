@@ -18,9 +18,6 @@ interface Event {
 
 }
 
-
-
-
 export default async function createEvent({
     params,
 }: {

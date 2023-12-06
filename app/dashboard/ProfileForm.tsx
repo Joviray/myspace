@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'react-toastify';
 
 export function ProfileForm({ user }: any){
     const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,7 @@ export function ProfileForm({ user }: any){
             },
         });
         let response = await res.json();
+        toast.success("Profile Updated!");
 
     };
 
@@ -40,8 +42,6 @@ export function ProfileForm({ user }: any){
                     defaultValue={user?.bio ?? ''}>
                 
                     </textarea>
-                <label htmlFor="age">Age</label>
-                <input type="number" name="age" defaultValue={user?.age ?? 0}/>
                 <label htmlFor="image">Profile Image URL</label>
                 <input type="text" name="image" defaultValue={user?.image ?? ''}/>
 
