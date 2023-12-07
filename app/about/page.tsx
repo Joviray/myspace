@@ -13,7 +13,12 @@ export default async function About(){
         <main>
             <h1>About</h1>
             <p>
-                This meeting system is built for the School of Engineering at San Francisco State.
+                This meeting system is built for the School of Engineering at San Francisco State. 
+            </p>
+
+            <h2>How does it work?</h2>
+            <p>
+                Sign in with your GitHub account and create a meeting. 
             </p>
         </main>
     )
