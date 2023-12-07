@@ -54,6 +54,7 @@ export async function DELETE(req: NextRequest){
 }
 
 export async function GET(req: NextRequest){
+    console.log("GET");
     const records = await prisma.resource.findMany();
     return NextResponse.json(records);
 }
