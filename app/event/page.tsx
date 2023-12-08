@@ -6,7 +6,7 @@ import { CreateEventForm } from "@/components/Forms/CreateEventForm";
 import { Event, Resource } from "@prisma/client";
 import { useState, useEffect } from "react";
 import { getEvents } from "./actions";
-import { getResources } from "../resource/[id]/actions";
+import { getResources } from "../resource/actions";
 
 
 export default function eventform() {

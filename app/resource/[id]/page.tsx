@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { Calendar } from "@/components/Calendar";
 import { useState, useEffect } from "react";
 import { Resource, User } from "@prisma/client";
-import { getResource, getOwner, getEvents } from "./actions";
+import { getResource, getOwner, getEvents } from "../actions";
 import { Spinner } from "@/components/Loaders/Spinner";
 import { get } from "http";
 import Email from "next-auth/providers/email";

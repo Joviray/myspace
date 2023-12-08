@@ -3,7 +3,7 @@
 import { getEvent } from "../actions"
 import { useState, useEffect } from "react";
 import { Spinner } from "@/components/Loaders/Spinner";
-import { getOwner, getResource } from "@/app/resource/[id]/actions";
+import { getOwner, getResource } from "@/app/resource/actions";
 import { Event, Resource, User } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
