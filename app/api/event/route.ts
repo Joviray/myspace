@@ -1,7 +1,7 @@
 // gets every resource from the database
 
-import { getServerSession } from 'next-auth';
 import { prisma } from  '@/lib/prisma';
+import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -38,6 +38,9 @@ export async function POST(req: NextRequest) {
     if (!resource) {
         return NextResponse.json({ error: "Resource not found" }, { status: 404 })
     }
+
+    const splittags = tags.split(",").map((tag: string) => tag.trim());
+
     const record = await prisma.event.create({
         data: {
             userId: currentUserId,
@@ -45,7 +48,7 @@ export async function POST(req: NextRequest) {
             description: description || "",
             url: url || "",
             image: image || "https://i.imgur.com/Jvh1OQm.jpeg",
-            tags: tags || [],
+            tags: splittags || [],
             resourceId: resourceId,
             start: new Date(start),
             end: new Date(end),
@@ -53,7 +56,6 @@ export async function POST(req: NextRequest) {
             allDay: allday || false,
         },
     });
-
         return NextResponse.json(record);
 
 }
@@ -80,6 +82,7 @@ export async function DELETE(req: NextRequest){
 }
 
 export async function GET(req: NextRequest){
+    console.log("GET request");
     const records = await prisma.event.findMany();
     return NextResponse.json(records);
 }

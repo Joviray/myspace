@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify'
 export default function Home() {
   return (
     <main className={styles.main}>
-
     </main>
   )
 }
