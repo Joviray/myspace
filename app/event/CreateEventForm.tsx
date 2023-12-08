@@ -1,86 +1,78 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { ToastContainer, toast } from 'react-toastify';
+"use client";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import { useState, useEffect } from "react";
+import { getEvents, createEvent } from "./actions";
+import styles from "./page.module.css";
 
-import { useState, useEffect } from 'react';
+export function CreateEventForm({ user, resources }: any) {
+  const router = useRouter();
 
+  const createForm = (event: any) => {
+    event.preventDefault();
 
-export function CreateEventForm({ user, resources }: any){
-    const router = useRouter();
+    const form = event.target;
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const description = formData.get("description") as string;
+    const url = formData.get("url") as string;
+    const image = formData.get("image") as string;
+    const resourceId = formData.get("resourceId") as string;
+    const tags = formData.get("tags") as string;
+    const start = formData.get("start") as string;
+    const end = formData.get("end") as string;
+    const allDay = formData.get("allDay") as unknown as boolean;
 
-    const createForm = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
+    createEvent({
+      name,
+      description,
+      url,
+      image,
+      resourceId,
+      tags,
+      start,
+      end,
+      allDay,
+    })
+      .then(() => {
+        toast.success("Event created");
+        router.push("/event");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
-        const body = JSON.stringify({
-            name: formData.get('name') as string,
-            description: formData.get('description') as string,
-            url: formData.get('url') as string,
-            image: formData.get('image') as string,
-            resourceId: formData.get('resourceId') as string,
-            tags: formData.get('tags')?.toString() || '', // Use optional chaining and toString() to handle null values
-            start: formData.get('start') as unknown as Date,
-            end: formData.get('end') as unknown as Date,
-            allDay: formData.get('allDay') as unknown as boolean,
-        });
+  return (
+    <div>
+      <h2>Add a new Meeting</h2>
+      <form onSubmit={createForm}>
+        <label htmlFor="name">Name</label>
+        <input type="text" id="name" name="name" />
 
-        const res = await fetch('/api/event', {
-            method: 'POST',
-            body: body,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        <label htmlFor="description">Description</label>
+        <input type="text" id="description" name="description" />
 
-        if (res) {
-            router.refresh();
-            toast.success("Room Created!");
-        } else {
-            toast.error("Room Creation Failed!");
-        }
-    };
+        <label htmlFor="resourceId">Room</label>
+        <select id="resourceId" name="resourceId">
+          {resources.map((resource: any) => (
+            <option key={resource.id} value={resource.id}>
+              {resource.title}
+            </option>
+          ))}
+        </select>
 
+        <label htmlFor="start">Start</label>
+        <input type="datetime-local" id="start" name="start" />
 
-    return (
-        <div>
-            <h2>Add a new Meeting</h2>
-            <form onSubmit={createForm}>
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" />
+        <label htmlFor="end">End</label>
+        <input type="datetime-local" id="end" name="end" />
 
-                <label htmlFor="description">Description</label>
-                <input type="text" id="description" name="description" />
+        <label htmlFor="allDay">All Day</label>
+        <input type="checkbox" id="allDay" name="allDay" />
 
-                <label htmlFor="url">URL</label>
-                <input type="text" id="url" name="url" />
-
-                <label htmlFor="image">Image</label>
-                <input type="text" id="image" name="image" />
-
-                <label htmlFor="resourceId">Resource ID</label>
-
-
-                <select id="resourceId" name="resourceId">
-                    {resources.map((resource: any) => (
-                        <option key={resource.id} value={resource.id}>{resource.title}</option>
-                    ))}
-
-                </select>
-
-                <label htmlFor="tags">Tags</label>
-                <input type="text" id="tags" name="tags" />
-
-                <label htmlFor="start">Start</label>
-                <input type="datetime-local" id="start" name="start" />
-
-                <label htmlFor="end">End</label>
-                <input type="datetime-local" id="end" name="end" />
-
-                <label htmlFor="allDay">All Day</label>
-                <input type="checkbox" id="allDay" name="allDay" />
-
-                <button type="submit">Create</button>
-            </form>
-        </div>
-    )
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  );
 }
