@@ -9,26 +9,8 @@ interface Props {
     resource: Resource;
     email?: boolean;
 }
-export const OwnerInfo = async ({ resource, email }: Props) => {
-    const owner = await prisma.user.findFirst({
-        where: {
-            id: resource.userId,
-        },
-    });
 
-    return (
-        <p>
-            <Link href={`/users/${owner?.id}`}>
-                {owner?.name}
-            </Link>
-            <span> at </span>
-            {email && (<a href={`mailto:${owner?.email}`}> {owner?.email}</a>)    }
-        </p>
-
-        );
-}
-
-export const ResourceCard = async ({ resource }: Props) => {
+export const ResourceCard = ({ resource }: Props) => {
 
     return (
         <div className={styles.card}>
@@ -41,7 +23,6 @@ export const ResourceCard = async ({ resource }: Props) => {
                 <h3>
                     <Link href={`/resource/${resource.id}`}>{resource.title}</Link>
                 </h3>
-                <OwnerInfo resource={resource} />
             </div>
         </div>
         );

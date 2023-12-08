@@ -6,7 +6,7 @@ import { getEvents } from '../event/actions';
 import { useState, useEffect } from 'react';
 import { Spinner } from '@/components/Loaders/Spinner';
 
-export default async function CalendarPage() {
+export default function CalendarPage() {
     const [events, setEvents] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
