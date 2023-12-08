@@ -22,7 +22,19 @@ export default async function CalendarPage() {
         },
     });
 
-    return(
-        <Calendar events={events  }/>
-    )
+    return (
+        <Calendar
+            initialView="dayGridMonth"
+            events={events.map(event => ({
+                ...event,
+                image: null,
+                userId: '',
+                resourceId: '',
+                tags: [],
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                allDay: false,
+            }))}
+        />
+    );
 }

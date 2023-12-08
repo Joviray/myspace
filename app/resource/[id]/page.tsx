@@ -1,39 +1,61 @@
-import { prisma } from "@/lib/prisma";
-import Error from 'next/error'
-import Link from "next/link";
+'use server';
+
+import { prisma } from '@/lib/prisma';
+import { Calendar } from '@/components/Calendar';
 import { OwnerInfo } from "@/components/ResourceCard/ResourceCard";
+
 
 
 export default async ({params}: {params: {id: string}}) => {
     const { id } = params;
-    //get the id of the current user from the route
 
-    const resource = await prisma.resource.findFirst({
+    const resource = await prisma.resource.findUnique({
         where: {
-            id: id,
-        },
+            id: id
+        }
     });
 
-
-    // get the owner of the resource
-
-    const owner = await prisma.user.findFirst({
-        where: {
-            id: resource?.userId,
+    const events = await prisma.event.findMany({
+        where : {
+            resourceId: id
+        },
+        select: {
+            id: true,
+            name: true,
+            start: true,
+            end: true,
+            url: true,
+            description: true,
+            user: {
+                select: {
+                    name: true,
+                    image: true,
+                },
+            },
         },
     });
-
-
+    
     return (
         <>
-        <h1>{resource?.title} </h1>
-        <p>{resource?.description}</p>
-        <img src={resource?.image ?? 'mememan.webp'} alt={`${resource?.title}`} height={300} />
-
-        <p>
-            For questions or inqueries about this room please contatct the owner
+            <Calendar
+                initialView="timeGridWeek"
+                events={events.map(event => ({
+                    ...event,
+                    image: null,
+                    userId: '',
+                    resourceId: '',
+                    tags: [],
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    allDay: false,
+                }))}
+                headerToolbar = {{
+                    left: "prev,next today",
+                    center: "title",
+                    right: "timeGridWeek,timeGridDay",
+                }}
+                />
             <OwnerInfo resource={resource} email={true}/>
-        </p>
         </>
-    )
-};
+    );
+}

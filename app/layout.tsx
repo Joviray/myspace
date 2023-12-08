@@ -4,6 +4,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import {ToastContainer, toast  } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <AuthProvider>
     <html lang="en">
