@@ -6,7 +6,7 @@ import { Spinner } from "@/components/Loaders/Spinner";
 import { getOwner, getResource } from "@/app/resource/actions";
 import { Event, Resource, User } from "@prisma/client";
 import Link from "next/link";
-import Image from "next/image";
+
 
 export default ({ params }: { params: { id: string } }) => {
     const { id } = params;
@@ -19,8 +19,16 @@ export default ({ params }: { params: { id: string } }) => {
         getEvent({ id })
             .then((e) => {
                 setEvent(e)
-                getOwner({ id: e?.userId! }).then((owner) => setOwner(owner))
-                getResource({ id: e?.resourceId! }).then((resource) => setResource(resource))
+                return e
+            })
+            .then((e) => {
+                getOwner({ id: e?.userId! })
+                    .then((owner) => setOwner(owner))
+                return e
+            })
+            .then((e) => {
+                getResource({ id: e?.resourceId! })
+                    .then((resource) => setResource(resource))
             })
             .then(() => setLoading(false));
     }, []);
