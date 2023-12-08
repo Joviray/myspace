@@ -2,7 +2,7 @@
 
 import styles from "./page.module.css";
 import { EventCard } from "@/components/EventCard/EventCard";
-import { CreateEventForm } from "@/app/event/CreateEventForm";
+import { CreateEventForm } from "@/components/Forms/CreateEventForm";
 import { Event, Resource } from "@prisma/client";
 import { useState, useEffect } from "react";
 import { getEvents } from "./actions";

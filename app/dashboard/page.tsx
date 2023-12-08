@@ -4,7 +4,7 @@ import { ProfileForm } from './ProfileForm';
 import { redirect } from 'next/navigation';
 import { SignOutButton } from '@/components/button';
 import { authOptions } from "../api/auth/[...nextauth]/route"
-import { CreateResourceForm } from '../resource/CreateResourceForm';
+import { CreateResourceForm } from '../../components/Forms/CreateResourceForm';
 import { ResourceList } from '../resource/ResourceList';
 
 

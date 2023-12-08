@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import { getEvents, createEvent } from "./actions";
-import styles from "./page.module.css";
+import { getEvents, createEvent } from "../../app/event/actions";
+import styles from "./Form.module.css";
 
 export function CreateEventForm({ user, resources }: any) {
   const router = useRouter();
