@@ -24,7 +24,7 @@ interface CalendarType {
   };
 }
 
-export async function Calendar(params: CalendarType) {
+export function Calendar(params: CalendarType) {
   const events: EventSourceInput = params.events.map((event: Event) => ({
     ...event,
     title: event.name,

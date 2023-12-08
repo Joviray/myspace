@@ -9,25 +9,8 @@ interface Props {
     event: Event;
     email?: boolean;
 }
-export const OwnerInfo = async ({ event, email }: Props) => {
-    const owner = await prisma.user.findFirst({
-        where: {
-            id: event.userId,
-        },
-    });
 
-    return (
-        <p>
-            <Link href={`/users/${owner?.id}`}>
-                {owner?.name}
-            </Link>
-            <span> at </span>
-            {email && (<a href={`mailto:${owner?.email}`}> {owner?.email}</a>)    }
-        </p>
-
-        );
-}
-export const EventCard = async ({ event }: Props) => {
+export const EventCard = ({ event }: Props) => {
 
     return (
         <div className={styles.card}>
@@ -40,7 +23,6 @@ export const EventCard = async ({ event }: Props) => {
                 <h3>
                     <Link href={`/event/${event.id}`}>{event.name}</Link>
                 </h3>
-                <OwnerInfo event={event} />
             </div>
         </div>
         );

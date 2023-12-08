@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
+import styles from "./Form.module.css";
 
 export function CreateResourceForm({ user }: any){
     const router = useRouter();

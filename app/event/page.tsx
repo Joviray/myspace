@@ -1,14 +1,28 @@
-"use server";
+'use client';
 
-import UserCard from "@/components/UserCard/UserCard";
 import styles from "./page.module.css";
-import { prisma } from "@/lib/prisma";
 import { EventCard } from "@/components/EventCard/EventCard";
-import { CreateEventForm } from "@/app/event/CreateEventForm";
+import { CreateEventForm } from "@/components/Forms/CreateEventForm";
+import { Event, Resource } from "@prisma/client";
+import { useState, useEffect } from "react";
+import { getEvents } from "./actions";
+import { getResources } from "../resource/actions";
 
-export default async function Users() {
-  const events = await prisma.event.findMany();
-  const resources = await prisma.resource.findMany();
+
+export default function eventform() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [resources, setResources] = useState<Resource[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    getEvents({}).then((events) => setEvents(events)).then(() => setLoading(false));
+    getResources({skip: 0, take: 0}).then((resources) => setResources(resources));
+
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (<>
       <h1>Events</h1>
